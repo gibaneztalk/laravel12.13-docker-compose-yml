@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    image: gibanezdev/laravel12.13
+    container_name: laravel12
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.11
+    container_name: laravel_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel_user
+      MYSQL_PASSWORD: secret
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
